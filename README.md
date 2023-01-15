@@ -1,2 +1,3 @@
 # p8_3pew
-personnal take on pico-8 blasteroids by lulu blue
+
+wip remake of 1979 Atari's Asterpids 
