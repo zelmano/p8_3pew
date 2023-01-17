@@ -58,6 +58,9 @@ function _draw()
 
 	circ(x,y,rad,debugcol)
 	pset(x,y,debugcol)
+
+	--push test from vscode
+
 end
 
 
