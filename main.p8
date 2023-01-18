@@ -32,6 +32,8 @@ function _draw()
 	local prx=flr(x+cos(rot-rob)*rad)
 	local pry=flr(y+sin(rot-rob)*rad)
 	
+	local pbx=flr(x+cos(rot+0.5)*2)
+	local pby=flr(x+sin(rot+0.5)*2)
 
 	--draw on screen
 	rect(0,0,127,127,1)
@@ -40,7 +42,8 @@ function _draw()
 	--pset(x,y,debugcol)
 	line(pfx,pfy,plx,ply,col)
 	line(pfx,pfy,prx,pry,col)
-	line(plx,ply,prx,pry,col)
+	line(plx,ply,pbx,pby,col)
+	line(pbx,pby,prx,pry,col)
 end
 
 -->8
