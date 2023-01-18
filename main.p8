@@ -8,9 +8,8 @@ vx=0
 vy=0
 
 rot=0--rotation
-len=7--len front-back
-wid=3--width center-side
-rad=7--hitbox radius
+rob=0.375--rotation of back points
+rad=5--hitbox radius
 
 spd=1--max speed
 acl=0.075--each frame v+=acl
@@ -23,50 +22,31 @@ debugcol=8
 
 function _draw()
 	cls()
+
+	local pfx=flr(x+cos(rot)*rad)
+	local pfy=flr(y+sin(rot)*rad)
+
+	local plx=flr(x+cos(rot+rob)*rad)
+	local ply=flr(y+sin(rot+rob)*rad)
+
+	local prx=flr(x+cos(rot-rob)*rad)
+	local pry=flr(y+sin(rot-rob)*rad)
 	
-	local tf=0.6
-	local ts=0.4
-	
-	--how much ship extend in front
-	local lenx=cos(rot)*len
-	local leny=sin(rot)*len
-	
-	--same on side
-	local sidex=cos(rot+0.25)*wid
-	local sidey=sin(rot+0.25)*wid
-	
-	--point at front
-	--60% of ship len front of cent
-	local pfx=x+lenx*tf
-	--point(x,y)
-	local pfy=y+leny*tf
-	
-	--point at left
-	--40% of ship len behind cent
-	local plx=x-lenx*ts+sidex
-	--point(x,y)
-	local ply=y-leny*ts+sidey
-	
-	--point at right
-	local prx=x-lenx*ts-sidex
-	local pry=y-leny*ts-sidey
-	
+
 	--draw on screen
+	rect(0,0,127,127,1)
+
+	--circ(x,y,rad,debugcol)
+	--pset(x,y,debugcol)
 	line(pfx,pfy,plx,ply,col)
 	line(pfx,pfy,prx,pry,col)
 	line(plx,ply,prx,pry,col)
-
-	circ(x,y,rad,debugcol)
-	pset(x,y,debugcol)
-
-	--push test from vscode
-
 end
-
 
 -->8
 
 function _update60()
+	--0.5 = half a turn
 	if btn(0) then
 		rot+=0.0125
 	end
