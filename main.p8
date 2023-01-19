@@ -14,6 +14,7 @@ rob=0.375--rotation of back points
 rad=5--hitbox radius
 
 spd=1--max speed
+rsp=0.0125--rotation speed
 acl=0.075--each frame v+=acl
 drg=0.025--friction each frame
 
@@ -35,7 +36,7 @@ function _draw()
 	local pry=flr(y+sin(rot-rob)*rad)
 	
 	local pbx=flr(x+cos(rot+0.5)*2)
-	local pby=flr(x+sin(rot+0.5)*2)
+	local pby=flr(y+sin(rot+0.5)*2)
 
 	--draw on screen
 	rect(0,0,127,127,1)
@@ -51,13 +52,22 @@ end
 -->8
 
 function _update60()
-	--0.5 = half a turn
+	--rotation
 	if btn(0) then
-		rot+=0.0125
+		rot+=rsp
 	end
 	if btn(1) then
-		rot-=0.0125
+		rot-=rsp
 	end
+	--acceleration
+
+	if btn(2) then
+		vx+=cos(rot)*acl
+		vy+=sin(rot)*acl
+	end
+	--movement
+	x+=vx
+	y+=vy
 end
 
 
