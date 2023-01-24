@@ -17,6 +17,7 @@ spd=1--max speed
 rsp=0.0125--rotation speed
 acl=0.075--each frame v+=acl
 drg=0.025--friction each frame
+vto=0.25--velocity threshold
 
 col=11
 debugcol=8
@@ -38,6 +39,8 @@ function _draw()
 	local pbx=flr(x+cos(rot+0.5)*2)
 	local pby=flr(y+sin(rot+0.5)*2)
 
+	vel=0
+
 	--draw on screen
 	rect(0,0,127,127,1)
 
@@ -47,6 +50,8 @@ function _draw()
 	line(pfx,pfy,prx,pry,col)
 	line(plx,ply,pbx,pby,col)
 	line(pbx,pby,prx,pry,col)
+	vel=abs(vx)+abs(vy)
+	print("vel:"..vel,1,1)
 end
 
 -->8
@@ -60,11 +65,18 @@ function _update60()
 		rot-=rsp
 	end
 	--acceleration
-
 	if btn(2) then
 		vx+=cos(rot)*acl
 		vy+=sin(rot)*acl
+		vel=abs(vx)+abs(vy)
+		--velocity capping
+		if(vel>1)then
+			local d=atan2(vx,vy)
+			vx=cos(d)
+			vy=sin(d)
+		end
 	end
+
 	--movement
 	x+=vx
 	y+=vy
