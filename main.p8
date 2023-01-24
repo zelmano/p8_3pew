@@ -17,7 +17,6 @@ spd=1--max speed
 rsp=0.0125--rotation speed
 acl=0.075--each frame v+=acl
 drg=0.025--friction each frame
-vto=0.25--velocity threshold
 
 col=11
 debugcol=8
@@ -76,7 +75,14 @@ function _update60()
 			vy=sin(d)
 		end
 	end
-
+	--friction
+	local vel=(abs(vx)+abs(vy))
+	local sx=sgn(vx)
+	local sy=sgn(vy)
+	vx-=drg*vx*vel
+	vy-=drg*vy*vel
+	if(sx!=sgn(vx))vx=0
+	if(sy!=sgn(vy))vy=0
 	--movement
 	x+=vx
 	y+=vy
