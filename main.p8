@@ -86,6 +86,9 @@ function _update60()
 	--movement
 	x+=vx
 	y+=vy
+	--wrapping
+	x=x%127
+	y=y%127
 end
 
 
