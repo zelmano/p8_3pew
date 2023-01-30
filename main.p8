@@ -92,6 +92,7 @@ end
 
 function coll()
 	--todo
+	--daily commit
 end
 
 
