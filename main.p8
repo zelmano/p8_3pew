@@ -19,6 +19,8 @@ drg=0.025--friction each frame
 col=11
 debugcol=8
 
+deb=0
+
 -->8
 
 function _draw()
@@ -49,7 +51,8 @@ function _draw()
 	line(plx,ply,pbx,pby,col)
 	line(pbx,pby,prx,pry,col)
 
-	print(coll(),10,10)
+	--debug prints
+	print(deb,10,10,11)
 end
 
 -->8
@@ -88,11 +91,17 @@ function _update60()
 	--wrapping
 	x=x%127
 	y=y%127
+	--collision with walls
+	coll()
 end
 
 function coll()
-	--todo
-	--daily commit
+	deb=mget(x/8,y/8)
+	--bounce
+	if(deb==1)then
+		vx=-vx
+		vy=-vy
+	end
 end
 
 
