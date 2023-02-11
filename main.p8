@@ -99,8 +99,11 @@ function coll()
 	deb=mget(x/8,y/8)
 	--bounce
 	if(deb==1)then
-		vx=-vx
-		vy=-vy
+		if(vx>vy)then
+			vx=-vx
+		else
+			vy=-vy
+		end
 	end
 end
 
